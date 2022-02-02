@@ -30,6 +30,7 @@ func Test_GodogBuild(t *testing.T) {
 		t.Run("OutsideGopathAndHavingOnlyFeature", testOutsideGopathAndHavingOnlyFeature)
 		t.Run("OutsideGopath", testOutsideGopath)
 		t.Run("OutsideGopathWithXTest", testOutsideGopathWithXTest)
+		t.Run("OutsideGopathWithCompatVersionArg", testOutsideGopathWithCompatVersionArg)
 		t.Run("InsideGopath", testInsideGopath)
 	})
 }

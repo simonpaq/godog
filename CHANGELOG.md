@@ -13,6 +13,7 @@ This document is formatted according to the principles of [Keep A CHANGELOG](htt
 ### Changed
 
 - Changed underlying cobra command setup to return errors instead of calling `os.Exit` directly to enable simpler testing. ([454](https://github.com/cucumber/godog/pull/454) - [mxygem])
+- Allow specifying compatibility level of `go mod tidy` command (TBD) - [simonpaq]
 
 ## [v0.12.4]
 

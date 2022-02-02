@@ -128,7 +128,12 @@ func Build(bin string) error {
 	// go has built. We will reuse it for our suite workdir.
 	temp := fmt.Sprintf(filepath.Join("%s", "temp-%d.test"), os.TempDir(), time.Now().UnixNano())
 	if os.Getenv("GO111MODULE") != "off" {
-		modTidyOutput, err := exec.Command("go", "mod", "tidy").CombinedOutput()
+		args := []string{"mod", "tidy"}
+		compat := os.Getenv("GOMODTIDYCOMPAT")
+		if compat != "" {
+			args = append(args, fmt.Sprintf("-compat=%s", compat))
+		}
+		modTidyOutput, err := exec.Command("go", args...).CombinedOutput()
 		if err != nil {
 			return fmt.Errorf("failed to tidy modules in tested package: %s, reason: %v, output: %s", abs, err, string(modTidyOutput))
 		}

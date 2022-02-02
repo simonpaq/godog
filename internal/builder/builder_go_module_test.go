@@ -59,6 +59,23 @@ func testOutsideGopathWithXTest(t *testing.T) {
 	builderTC.run(t)
 }
 
+func testOutsideGopathWithCompatVersionArg(t *testing.T) {
+	builderTC := builderTestCase{}
+
+	builderTC.dir = filepath.Join(os.TempDir(), t.Name(), "godogs")
+	builderTC.files = map[string]string{
+		"godogs.feature": builderFeatureFile,
+		"godogs.go":      builderMainCodeFile,
+		"godogs_test.go": builderTestFile,
+	}
+
+	builderTC.goModCmds = make([]*exec.Cmd, 1)
+	builderTC.goModCmds[0] = exec.Command("go", "mod", "init", "godogs")
+	builderTC.goModCmds[0].Env = append(builderTC.goModCmds[0].Env, "GOMODTIDYCOMPAT=1.17")
+
+	builderTC.run(t)
+}
+
 func testInsideGopath(t *testing.T) {
 	builderTC := builderTestCase{}
 
